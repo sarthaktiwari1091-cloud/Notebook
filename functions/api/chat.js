@@ -61,7 +61,7 @@ export async function onRequestPost({ request, env }) {
       method: 'POST',
       headers: { 'Content-Type': 'application/json', 'x-goog-api-key': env.GEMINI_API_KEY },
       body: JSON.stringify({
-        systemInstruction: { parts: [{ text: String(system).slice(0, 4000) }] },
+        systemInstruction: { parts: [{ text: String(system).slice(0, 4000)  ' Never use LaTeX or dollar signs. Write maths in plain text, like x^2, 3/2, sqrt(x), H2O.'  }] },
         contents,
         generationConfig: {
           temperature: json ? 0.4 : 0.7,
