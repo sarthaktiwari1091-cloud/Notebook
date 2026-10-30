@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,interactive-widget=resizes-content">
+<title>StudyAI</title>
+<meta name="description" content="StudyAI: AI chat, homework helper, Japanese tutor, planner, notes and quizzes.">
+<meta name="theme-color" content="#7c3aed">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="icons/icon-192.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<script>
+  try {
+    var t = (JSON.parse(localStorage.getItem('studyai:v1') || '{}').theme) || 'system';
+    var dark = t === 'dark' || (t === 'system' && matchMedia('(prefers-color-scheme: dark)').matches);
+    document.documentElement.dataset.theme = dark ? 'dark' : 'light';
+  } catch (e) {}
+</script>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div id="app">
+  <header id="top">
+    <button id="backBtn" class="icon-btn" hidden aria-label="Back" data-ic="back"></button>
+    <div class="brand"><div class="logo" aria-hidden="true">✦</div><h1 id="title">StudyAI</h1></div>
+    <div class="spacer"></div>
+    <button id="themeBtn" class="icon-btn" aria-label="Toggle dark mode"></button>
+    <button id="setBtn" class="icon-btn" aria-label="Settings" data-ic="settings"></button>
+  </header>
+
+  <main id="views">
+    <section class="view" id="v-home" aria-label="Home"></section>
+    <section class="view" id="v-chat" aria-label="AI Chat">
+      <div class="chat-tools">
+        <button class="icon-btn" data-act="hist" aria-label="Chat history" data-ic="menu"></button>
+        <div class="chips scroll-x" id="modeChips"></div>
+        <button class="icon-btn" data-act="newChat" aria-label="New chat" data-ic="plus"></button>
+      </div>
+      <div id="msgs" aria-live="polite"></div>
+      <form id="composer" autocomplete="off">
+        <textarea id="cin" rows="1" placeholder="Ask StudyAI…" enterkeyhint="send" aria-label="Message"></textarea>
+        <button class="send" id="sendBtn" aria-label="Send" data-ic="send"></button>
+      </form>
+    </section>
+    <section class="view" id="v-homework" aria-label="Homework helper"></section>
+    <section class="view" id="v-japanese" aria-label="Japanese tutor"></section>
+    <section class="view" id="v-plan" aria-label="Study planner"></section>
+    <section class="view" id="v-notes" aria-label="Notes"></section>
+    <section class="view" id="v-quiz" aria-label="Quiz"></section>
+  </main>
+
+  <nav id="nav" aria-label="Main">
+    <button data-go="home" data-nav="home"><span class="nv" data-ic="home"></span>Home</button>
+    <button data-go="chat" data-nav="chat"><span class="nv" data-ic="chat"></span>Chat</button>
+    <button data-go="plan" data-nav="plan"><span class="nv" data-ic="calendar"></span>Plan</button>
+    <button data-go="notes" data-nav="notes"><span class="nv" data-ic="note"></span>Notes</button>
+    <button data-go="quiz" data-nav="quiz"><span class="nv" data-ic="quiz"></span>Quiz</button>
+  </nav>
+</div>
+
+<div id="sheetWrap" hidden>
+  <div class="scrim" data-act="closeSheet"></div>
+  <div id="sheet" role="dialog" aria-modal="true"></div>
+</div>
+<div id="toasts" aria-live="assertive"></div>
+
+<script src="app.js"></script>
+</body>
+  </html>
